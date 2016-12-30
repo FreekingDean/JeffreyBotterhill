@@ -15,7 +15,7 @@ class BlurbsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def blurb_params
       params.require(:blurb).permit(:message, :source, :type).tap do |whitelist|
-        whitelist[:metadata] = params[:blurb][:metadata] || {}
+        whitelist[:metadata] = params['blurb']['metadata'].permit!
         whitelist[:api_client_id] = api_client.id
       end
     end
