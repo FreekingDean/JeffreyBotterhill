@@ -4,7 +4,7 @@ class BlurbsController < ApplicationController
     @blurb = Blurb.new(blurb_params)
 
     if @blurb.save
-      render json: @blurb, status: :created, location: @blurb
+      render json: @blurb, status: :created
     else
       render json: @blurb.errors, status: :unprocessable_entity
     end
