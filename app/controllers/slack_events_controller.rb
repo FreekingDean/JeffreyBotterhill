@@ -2,17 +2,22 @@ class SlackEventsController < ApplicationController
   before_action :handle_challenge
 
   def create
-    if params[:type] == 'app_mention'
-      query = Lexicon.clean(params[:text])
+    if params[:type] != 'event_callback'
+      error "Bad req #{params}"
+      render json: {success: false}
+    end
+
+    event = params[:event]
+
+    if event[:type] == 'app_mention'
+      query = Lexicon.clean(event[:text])
       resp = Markov.go(query) 
       info resp
     end
 
-    if params[:type] == 'event_callback'
-      if params[:event][:type] == 'message'
-        query = Lexicon.clean(params[:event][:text])
-        Learn.train_phrase(query)
-      end
+    if event[:type] == 'message'
+      query = Lexicon.clean(event[:text])
+      Learn.train_phrase(query) if Lexicon.get_number_of_tokens(query) >= 3
     end
   end
 
