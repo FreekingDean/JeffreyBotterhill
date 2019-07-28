@@ -1,4 +1,6 @@
 class Entry < ApplicationRecord
+  attr_accessor :probability
+
   def self.get_words(gram_1:, gram_2: nil)
     other = []
     scope = Entry.select('word, sum(count) as count').where(gram_1: gram_1)
