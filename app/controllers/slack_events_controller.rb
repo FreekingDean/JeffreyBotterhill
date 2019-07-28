@@ -3,7 +3,7 @@ class SlackEventsController < ApplicationController
 
   def create
     if params[:type] != 'event_callback'
-      error "Bad req #{params}"
+      logger.error "Bad req #{params}"
       render json: {success: false}
     end
 
@@ -12,7 +12,7 @@ class SlackEventsController < ApplicationController
     if event[:type] == 'app_mention'
       query = Lexicon.clean(event[:text])
       resp = Markov.go(query) 
-      info resp
+      logger.info resp
     end
 
     if event[:type] == 'message'
