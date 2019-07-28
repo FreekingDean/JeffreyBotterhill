@@ -25,6 +25,4 @@ test:
   database: jeffrey_botterhill_test
 
 production:
-  <<: *default
-  url: env
-  database: jeffrey_botterhill
+  url: <%= ENV['DATABASE_URL'] %>
