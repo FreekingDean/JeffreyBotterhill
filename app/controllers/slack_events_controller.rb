@@ -12,7 +12,7 @@ class SlackEventsController < ApplicationController
     if event[:type] == 'app_mention'
       query = Lexicon.clean(event[:text])
       resp = Markov.go(query) 
-      logger.info resp
+      slack_client.chat_postMessage(channel: event[:channel], text: resp)
     end
 
     if event[:type] == 'message'
@@ -26,5 +26,9 @@ class SlackEventsController < ApplicationController
     if params[:type] == 'url_verification'
       render json: {challenge: params[:challenge]}
     end
+  end
+
+  def slack_client
+    @client ||= Slack::Web::Client.new
   end
 end

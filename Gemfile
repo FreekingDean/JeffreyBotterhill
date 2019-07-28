@@ -5,6 +5,7 @@ gem 'pg'
 gem 'puma'
 gem 'google-cloud-language'
 gem 'engtagger'
+gem 'slack-ruby-client'
 
 group :development, :test do
   gem 'pry'
