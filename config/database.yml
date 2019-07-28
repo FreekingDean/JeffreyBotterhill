@@ -10,6 +10,8 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
+  password: postgres
+  username: badpass
 
 development:
   <<: *default
@@ -24,4 +26,5 @@ test:
 
 production:
   <<: *default
+  url: env
   database: jeffrey_botterhill

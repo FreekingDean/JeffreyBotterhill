@@ -10,31 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307192253) do
+ActiveRecord::Schema.define(version: 2019_07_28_002115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "api_clients", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "blurbs", force: :cascade do |t|
-    t.text     "message"
-    t.jsonb    "metadata",      default: "{}", null: false
-    t.string   "api_client_id"
-    t.string   "source"
-    t.string   "type"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+  create_table "blurbs", id: :serial, force: :cascade do |t|
+    t.text "message"
+    t.jsonb "metadata", default: "{}", null: false
+    t.string "api_client_id"
+    t.string "source"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "google_parse_results", force: :cascade do |t|
-    t.integer  "blurb_id"
-    t.jsonb    "result"
+  create_table "entries", force: :cascade do |t|
+    t.string "gram_1"
+    t.string "gram_2"
+    t.string "word"
+    t.string "tag"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "google_parse_results", id: :serial, force: :cascade do |t|
+    t.integer "blurb_id"
+    t.jsonb "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
