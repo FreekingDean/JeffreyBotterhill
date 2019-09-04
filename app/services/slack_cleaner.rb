@@ -3,7 +3,7 @@ class SlackCleaner
   @users = {}
   @refresh_count = 0
   def self.clean(data)
-    matches = (data.match(CAPTURE) || []).to_a
+    matches = data.match(CAPTURE).try(:captures) || []
     matches.each do |match|
       data.gsub!("#{match}", "#{get_user(match)}")
     end
