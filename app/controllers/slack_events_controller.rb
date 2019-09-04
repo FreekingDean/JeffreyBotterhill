@@ -10,9 +10,8 @@ class SlackEventsController < ApplicationController
     event = params[:event]
 
     event_text = event[:text] || ""
-      #SlackCleaner.clean(event_text)
     cleaned_query = Lexicon.clean(
-      event_text
+      SlackCleaner.clean(event_text)
     )
 
     if event[:type] == 'app_mention'
