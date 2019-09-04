@@ -1,5 +1,7 @@
 class SlackCleaner
   CAPTURE = %r{\A.*<@(.*)>.*\z}
+  @users = {}
+  @refresh_count = 0
   def self.clean(data)
     matches = (data.match(CAPTURE) || []).to_a
     matches.each do |match|
