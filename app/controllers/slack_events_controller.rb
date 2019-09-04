@@ -9,15 +9,17 @@ class SlackEventsController < ApplicationController
 
     event = params[:event]
 
+    cleaned_query = Lexicon.clean(
+      event[:text] || ""
+    )
+
     if event[:type] == 'app_mention'
-      query = Lexicon.clean(event[:text])
-      resp = Markov.go(query) 
+      resp = Markov.go(cleaned_query) 
       slack_client.chat_postMessage(channel: event[:channel], text: resp)
     end
 
     if event[:type] == 'message'
-      query = Lexicon.clean(event[:text])
-      Learn.train_phrase(query) if Lexicon.get_number_of_tokens(query) >= 3
+      Learn.train_phrase(cleaned_query) if Lexicon.get_number_of_tokens(cleaned_query) >= 3
     end
   end
 
