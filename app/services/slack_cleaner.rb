@@ -18,10 +18,11 @@ class SlackCleaner
     user = @users[username]
     if user == ''
       refresh_user_list
-      get_user(username)
+      user = get_user(username)
     else
       @refresh_count = 0
     end
+    user
   end
 
   def self.refresh_user_list
