@@ -46,6 +46,8 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     awesome_print (1.8.0)
+    bugsnag (6.12.0)
+      concurrent-ruby (~> 1.0)
     builder (3.2.3)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
@@ -193,6 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  bugsnag (~> 6.12)
   dotenv-rails
   engtagger
   google-cloud-language

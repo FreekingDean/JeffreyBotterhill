@@ -18,3 +18,5 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
 end
+
+gem "bugsnag", "~> 6.12"
