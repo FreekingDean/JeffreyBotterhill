@@ -16,7 +16,7 @@ class SlackCleaner
 
   def self.get_user(username)
     user = @users[username]
-    if user == ''
+    if user.nil?
       refresh_user_list
       user = get_user(username)
     else
@@ -28,7 +28,7 @@ class SlackCleaner
   def self.refresh_user_list
     raise 'User refresh too much' if @refresh_count > 5
     @refresh_count += 1
-    client.users_list(presence: true, limit: 20) do |response|
+    slack_client.users_list(presence: true, limit: 20) do |response|
       response.members.each do |member|
         @users[member.id] = member.name
       end
