@@ -1,7 +1,7 @@
 class SlackCleaner
-  capture = %r{\A.*<@(.*)>.*\z}
+  CAPTURE = %r{\A.*<@(.*)>.*\z}
   def self.clean(data)
-    matches = data.match(capture)
+    matches = data.match(CAPTURE)
     matches.each do |match|
       data.gsub!("#{match}", "#{get_user(match)}")
     end
