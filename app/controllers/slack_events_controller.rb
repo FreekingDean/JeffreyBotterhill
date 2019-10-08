@@ -15,6 +15,7 @@ class SlackEventsController < ApplicationController
     )
 
     if event[:type] == 'app_mention'
+      if event[:user] == '@ufjmb5mht'.capitalize
       resp = Markov.go(cleaned_query) 
       slack_client.chat_postMessage(channel: event[:channel], text: resp)
     end
