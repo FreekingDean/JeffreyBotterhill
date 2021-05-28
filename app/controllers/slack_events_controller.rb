@@ -2,7 +2,6 @@ class SlackEventsController < ApplicationController
   before_action :handle_challenge
 
   def create
-    puts "got request #{params.inspect}"
     if params[:type] != 'event_callback'
       logger.error "Bad req #{params}"
       render json: {success: false}
