@@ -32,7 +32,7 @@ class Formulator
     end
 
     def sentencify(word_arr)
-      "#{word_arr.first.titleize} #{word_arr[1..-1].join(' ')}."
+      "#{word_arr.first.titleize} #{word_arr[1..-1].join(' ').strip}."
     end
   end
 end
