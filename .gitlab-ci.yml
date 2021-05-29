@@ -5,16 +5,6 @@
 # for the default branch and all other (MR) branches.
 stages:
   - build
-  - deploy
-
-helm-deploy:
-  stage: deploy
-  image:
-    name: dtzar/helm-kubectl
-  stage: build
-  script:
-    - helm upgrade jeffbot ./deploy/chart/jeffbot -f ./deploy/chart/jeffbot/values.yaml
-
 docker-build:
   # Use the official docker image.
   image:
