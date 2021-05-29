@@ -50,5 +50,5 @@ deploy:
     entrypoint: ["/bin/sh", "-c"]
   script:
     - cd $CI_PROJECT_DIR/deploy/chart/jeffrey-botterhill
-    - helm install -f values.yaml --set gitsha=$CI_COMMIT_SHA jeffbot .
+    - helm install -n default -f values.yaml --set gitsha=$CI_COMMIT_SHA jeffbot .
 
