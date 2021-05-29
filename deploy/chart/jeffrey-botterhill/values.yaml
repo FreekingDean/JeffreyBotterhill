@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+gitsha: 'not-present'
+
 image:
   repository: 'registry.local.deangalvin.com/freekingdean/jeffrey-botterhill'
   pullPolicy: Always
@@ -11,6 +13,7 @@ image:
 
 imagePullSecrets:
   - name: 'gitlab'
+
 nameOverride: ""
 fullnameOverride: ""
 

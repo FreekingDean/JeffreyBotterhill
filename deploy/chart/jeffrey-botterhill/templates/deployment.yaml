@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "jeffrey-botterhill.fullname" . }}
   labels:
+    gitsha: {{ .Values.gitsha }}
     {{- include "jeffrey-botterhill.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
