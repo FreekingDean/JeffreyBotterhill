@@ -39,13 +39,13 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: "https-public"
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
-    - host: jeffrey-botterhill.public.deangalvin.com
+    - host: jeffbot.public.deangalvin.com
       paths:
       - path: /
   tls:
     - secretName: https-public
       hosts:
-        - jeffrey-botterhill.public.deangalvin.com
+        - jeffbot.public.deangalvin.com
 
 resources: {}
   # limits:
