@@ -3,13 +3,23 @@
 #
 # This template uses one generic job with conditional builds
 # for the default branch and all other (MR) branches.
+stages:
+  - build
+  - deploy
+
+helm-deploy:
+  stage: deploy
+  image:
+    name: dtzar/helm-kubectl
+  stage: build
+  script:
+    - helm upgrade jeffbot ./deploy/chart/jeffbot -f ./deploy/chart/jeffbot/values.yaml
+
 docker-build:
   # Use the official docker image.
   image:
     name: gcr.io/kaniko-project/executor:debug
   stage: build
-  services:
-    - docker:dind
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
