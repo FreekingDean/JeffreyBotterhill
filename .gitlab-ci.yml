@@ -61,3 +61,6 @@ deploy:
     - helm upgrade -n default -f values.yaml --set gitsha=$CI_COMMIT_SHA jeffbot .
   only:
     - master
+  environment:
+    name: production
+    url: https://jeffbot.public.deangalvin.com
