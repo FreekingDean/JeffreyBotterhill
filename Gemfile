@@ -6,6 +6,7 @@ gem 'puma'
 gem 'google-cloud-language'
 gem 'engtagger'
 gem 'slack-ruby-client'
+gem 'annotate'
 
 group :development, :test do
   gem 'pry'

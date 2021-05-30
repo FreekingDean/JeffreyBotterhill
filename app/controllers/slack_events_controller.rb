@@ -10,6 +10,7 @@ class SlackEventsController < ApplicationController
     event = params[:event]
 
     event_text = event[:text] || ""
+    Blurb.create!(metadata: event, message: event[:text], source: 'slack')
     cleaned_query = Lexicon.clean(
       SlackCleaner.clean(event_text)
     )
