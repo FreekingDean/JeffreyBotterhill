@@ -11,7 +11,7 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: JeffreyBotterhill
+  IMAGE_NAME: jeffreybotterhill 
 
 jobs:
   # Run tests.
