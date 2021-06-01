@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: 'FreekingDean/Jeffbot'
+  repository: 'docker.pkg.github.com/freekingdean/jeffreybotterhill/jeffreybotterhill'
   pullPolicy: Always
   tag: "latest"
 
