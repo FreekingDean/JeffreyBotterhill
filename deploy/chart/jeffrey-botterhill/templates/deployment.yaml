@@ -35,31 +35,30 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            {{- include ".Values.env" . | nindent 12 }}
             - name: GIT_SHA
               value: {{ .Values.gitsha }}
             - name: RAILS_LOG_TO_STDOUT
-              value: "true"
+              value: {{ .Values.logToStdout | quote }}
             - name: SECRET_KEY_BASE
-              value: testing
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "jeffrey-botterhill.fullname" . }}
+                  key: secretKeyBase
             - name: RACK_ENV
-              value: PRODUCTION
+              value:  {{ .Values.environment | upper | quote}}
             - name: RAILS_ENV
-              value: PRODUCTION
+              value:  {{ .Values.environment | upper | quote}}
             - name: SLACK_API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: slack-token
-                  key: token
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: jeffbot-db
-                  key: postgresql-password
+                  name: {{ include "jeffrey-botterhill.fullname" . }}
+                  key: slackToken
             - name: DATABASE_URL
-              value: "postgres://postgres:$(DATABASE_PASSWORD)@jeffbot-db-postgresql/jeffrey_botterhill"
+              value: {{ .Values.databaseURL }}
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
