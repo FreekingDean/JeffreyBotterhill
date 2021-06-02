@@ -20,12 +20,15 @@ class SlackEventsController < ApplicationController
       slack_client.chat_postMessage(channel: event[:channel], text: resp)
     end
 
-    if event[:type] == 'message'
+    if event[:type] == 'message' || event[:type] == 'app_mention'
       Learn.train_phrase(cleaned_query) if Lexicon.get_number_of_tokens(cleaned_query) >= 3
     end
 
     if event[:type] == 'pin_added'
-      puts event[:item].inspect
+      item = event[:item]
+      break unless item[:type] == 'message'
+      break unless item[:message][:bot_id] == 'BFKH392QP'
+      TwitterService.new.tweet(item[:message][:text])
     end
   end
 
