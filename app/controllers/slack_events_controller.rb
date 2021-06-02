@@ -10,7 +10,7 @@ class SlackEventsController < ApplicationController
     event = params[:event]
 
     event_text = event[:text] || ""
-    Blurb.create!(metadata: event, message: event[:text], source: 'slack')
+    Blurb.create!(metadata: event, message: event_text, source: 'slack') unless event_text == ""
     cleaned_query = Lexicon.clean(
       SlackCleaner.clean(event_text)
     )
@@ -22,6 +22,10 @@ class SlackEventsController < ApplicationController
 
     if event[:type] == 'message'
       Learn.train_phrase(cleaned_query) if Lexicon.get_number_of_tokens(cleaned_query) >= 3
+    end
+
+    if event[:type] == 'pin_added'
+      puts event[:item].inspect
     end
   end
 

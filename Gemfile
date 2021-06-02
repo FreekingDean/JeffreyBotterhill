@@ -7,6 +7,7 @@ gem 'google-cloud-language'
 gem 'engtagger'
 gem 'slack-ruby-client'
 gem 'annotate'
+gem 'twitter'
 
 group :development, :test do
   gem 'pry'
